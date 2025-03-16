@@ -1,25 +1,20 @@
 class Solution {
-    fun majorityElement(nums: IntArray): Int  {
+    fun majorityElement(nums: IntArray): Int {
+        var candidate = 0
+        var point = 0
 
-        nums.sort()
+        for (i in 0..nums.lastIndex) {
 
-        var count = 0
-        var lastValue = 0
-
-        nums.forEachIndexed { index, it ->
-            if (index < 1) {
-                count++
-                lastValue = it
-            } else if (lastValue == it) {
-                count++
-            } else if (it == nums[index - 1] && count > 0) {
-                count--
+            if (point == 0) {
+                candidate = nums[i]
             }
 
-            if (count <= 0) {
-                lastValue = it
+            if (nums[i] == candidate) {
+                point++
+            } else {
+                point--
             }
         }
-        return lastValue
+        return candidate
     }
 }
